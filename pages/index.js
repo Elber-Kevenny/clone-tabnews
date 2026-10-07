@@ -5,8 +5,5 @@ function Home() {
     </h1>
   );
 }
-function teste() {
-  console.log("elber");
-}
 
 export default Home;
