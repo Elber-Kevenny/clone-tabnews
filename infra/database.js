@@ -7,8 +7,9 @@ const query = async (queryObject) => {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: process.env.NODE_ENV = true ? "development" : false
+    ssl: process.env.NODE_ENV === "development" ? true : false
   });
+
 
   try {
     await client.connect();
