@@ -20,7 +20,6 @@ const migrations = async (request, response) => {
       ...migrationsConfig,
       dryrun: true,
     });
-    await dbClient.end();
     return response.status(200).json(pendingMigrations);
   }
 
@@ -29,6 +28,8 @@ const migrations = async (request, response) => {
       ...migrationsConfig,
       dryrun: false,
     });
+
+    
     await dbClient.end();
 
     if (migratedMigrations.length > 0) {
