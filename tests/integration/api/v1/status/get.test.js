@@ -3,7 +3,6 @@ test("Get test to return status 200", async () => {
   expect(response.status).toBe(200);
 
   const responseBody = await response.json();
-  console.log(responseBody);
 
   expect(responseBody.updated_at).toBeTruthy();
   expect(responseBody.dependencies.database.max_conections).toBeTruthy();

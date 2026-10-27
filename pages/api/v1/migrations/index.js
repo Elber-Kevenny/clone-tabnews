@@ -11,15 +11,14 @@ const migrations = async (request, response) => {
     dbClient,
     dir: join("infra", "migrations"),
     direction: "up",
+    dryrun: true,
     verbose: true,
     migrationsTable: "pgmigrations",
   };
 
   if (request.method === "GET") {
-    const pendingMigrations = await runner({
-      ...migrationsConfig,
-      dryrun: true,
-    });
+    const pendingMigrations = await runner(migrationsConfig);
+    await dbClient.end();
     return response.status(200).json(pendingMigrations);
   }
 
@@ -29,7 +28,6 @@ const migrations = async (request, response) => {
       dryrun: false,
     });
 
-    
     await dbClient.end();
 
     if (migratedMigrations.length > 0) {
