@@ -38,5 +38,4 @@ const migrations = async (request, response) => {
 
   return response.status(405).end();
 };
-
 export default migrations;
