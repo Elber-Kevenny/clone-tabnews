@@ -34,8 +34,9 @@ const migrations = async (request, response) => {
       return response.status(201).json(migratedMigrations);
     }
     return response.status(200).json(migratedMigrations);
+  } else {
+    await dbClient.end();
+    return response.status(405).end();
   }
-
-  return response.status(405).end();
 };
 export default migrations;
