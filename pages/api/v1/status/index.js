@@ -1,6 +1,7 @@
 import database from "infra/database.js";
 
 const status = async (_request, response) => {
+  return response.status(500).json({erro: "errp"});
   const updateAt = new Date().toISOString();
   const query1 = {
     text: "SELECT name, setting FROM pg_settings WHERE name IN ('max_connections', 'server_version');",
