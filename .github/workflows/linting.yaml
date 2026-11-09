@@ -3,7 +3,7 @@ name: Linting
 on: pull_request
 
 jobs:
-  jest:
+  prettier:
     name: Prettier
     runs-on: ubuntu-latest
     steps:
@@ -11,8 +11,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-versions: "v20.19.4"
+          node-version: "v20.19.4"
 
       - run: npm ci
 
-      - run: npm test
+      - run: npm run lint:prettier:check
+
+  eslint:
+    name: Eslint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "v20.19.4"
+
+      - run: npm ci
+
+      - run: npm run lint:eslint:check
