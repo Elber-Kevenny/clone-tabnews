@@ -2,7 +2,8 @@ import js from "@eslint/js";
 import jest from "eslint-plugin-jest";
 import globals from "globals";
 import pluginNext from "@next/eslint-plugin-next";
-// import pluginReact from "eslint-plugin-react";
+import prettierPlugin from "eslint-plugin-prettier";
+import eslintConfigPrettier from "eslint-config-prettier";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
@@ -13,9 +14,11 @@ export default defineConfig([
     "**/*config*",
     "**/migrations/*",
   ]),
+  js.configs.recommended,
+  eslintConfigPrettier,
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: { js, "@next/next": pluginNext, jest },
+    plugins: { js, "@next/next": pluginNext, jest, prettier: prettierPlugin },
     extends: ["js/recommended"],
     languageOptions: {
       globals: {
@@ -35,8 +38,7 @@ export default defineConfig([
       ...pluginNext.configs["core-web-vitals"].rules,
       ...jest.configs.recommended.rules,
       "jest/no-identical-title": "off",
+      "prettier/prettier": "error",
     },
   },
-
-  // pluginReact.configs.flat.recommended,
 ]);
