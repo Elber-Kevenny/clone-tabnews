@@ -1,9 +1,8 @@
-import database from "infra/database";
 import orchestrator from "tests/orchestrator";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
-  await database.query("drop schema public cascade; create schema public");
+  await orchestrator.clearDatabase();
 });
 
 describe("POST to /api/v1/migrations", () => {
@@ -35,7 +34,7 @@ describe("POST to /api/v1/migrations", () => {
 
         expect(response2.status).toBe(200);
         expect(Array.isArray(responseBody)).toBe(true);
-        expect(responseBody.length).toBe(0); 
+        expect(responseBody.length).toBe(0);
       });
     });
   });
